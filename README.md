@@ -1,1 +1,1 @@
-# IIThub.github.io
+# iiThub.github.io
