@@ -11,7 +11,6 @@
 <body>
     <div class="flex-container">
         <div class="main-content">
-            <!-- 使用与第一页相同的header结构 -->
             <div class="header">
                 <div class="left">
                     <div class="logo">
@@ -29,625 +28,1173 @@
                     <a href="#">Sign in</a>
                 </div>
             </div>
-    <div class="main">
-        <div class="content">
-            <div class="study-plan">
-                <div class="card">
-                    <h3>System Design</h3>
-                    <p>Learn your backend design! (ADEV, DBAV)</p>
-                    <button onclick="filterProblems('system-design')">Start Learning</button>
+            <div class="main">
+                <div class="content">
+                    <div class="study-plan">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon system-design-icon">
+                                    <i class="fas fa-server"></i>
+                                </div>
+                                <h3>System Design</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Master backend development with comprehensive system design principles and patterns.</p>
+                                <div class="card-tags">
+                                    <span class="card-tag">ADEV</span>
+                                    <span class="card-tag">DBAV</span>
+                                    <span class="card-tag">Architecture</span>
+                                </div>
+                                <div class="card-stats">
+                                    <div class="card-stat">
+                                        <i class="fas fa-book"></i>
+                                        <span>12 Chapters</span>
+                                    </div>
+                                    <div class="card-stat">
+                                        <i class="fas fa-clock"></i>
+                                        <span>40 Hours</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="system-design-btn" onclick="filterProblems('system-design')">
+                                <i class="fas fa-play"></i>
+                                Start Learning
+                            </button>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon algorithms-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h3>Data Structures & Algorithms</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Learn essential DSA concepts through Python and JavaScript implementations.</p>
+                                <div class="card-tags">
+                                    <span class="card-tag">DSAG</span>
+                                    <span class="card-tag">Python</span>
+                                    <span class="card-tag">JavaScript</span>
+                                </div>
+                                <div class="card-stats">
+                                    <div class="card-stat">
+                                        <i class="fas fa-tasks"></i>
+                                        <span>200+ Problems</span>
+                                    </div>
+                                    <div class="card-stat">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Progressive</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="algorithms-btn" onclick="filterProblems('dsa')">
+                                <i class="fas fa-play"></i>
+                                Start Learning
+                            </button>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon questions-icon">
+                                    <i class="fas fa-question"></i>
+                                </div>
+                                <h3>Top Questions</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Practice the most frequently asked interview questions and optimal solutions.</p>
+                                <div class="card-tags">
+                                    <span class="card-tag">Interviews</span>
+                                    <span class="card-tag">LeetCode</span>
+                                    <span class="card-tag">Popular</span>
+                                </div>
+                                <div class="card-stats">
+                                    <div class="card-stat">
+                                        <i class="fas fa-star"></i>
+                                        <span>Top 100</span>
+                                    </div>
+                                    <div class="card-stat">
+                                        <i class="fas fa-users"></i>
+                                        <span>Community</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="questions-btn" onclick="filterProblems('interview')">
+                                <i class="fas fa-play"></i>
+                                Get Started
+                            </button>
+                        </div>
+                    </div>
+                    <h2>Study Plan</h2>
+                    <div class="topics">
+                        <div class="topic" onclick="filterProblems('array')">Array</div>
+                        <div class="topic" onclick="filterProblems('tree')">Tree</div>
+                        <div class="topic" onclick="filterProblems('string')">String</div>
+                        <div class="topic" onclick="filterProblems('hash-table')">Hash Table</div>
+                        <div class="topic" onclick="filterProblems('dynamic-programming')">Dynamic Programming</div>
+                        <div class="topic" onclick="filterProblems('math')">Math</div>
+                        <div class="topic" onclick="filterProblems('sorting')">Sorting</div>
+                        <div class="topic" onclick="filterProblems('greedy')">Greedy</div>
+                        <div class="topic" onclick="showAllTopics()">All Topics</div>
+                    </div>
+                    <div class="filters">
+                        <div class="left">
+                            <select id="difficulty-filter">
+                                <option value="all">All Difficulties</option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                            <select id="status-filter">
+                                <option value="all">All Status</option>
+                                <option value="solved">Solved</option>
+                                <option value="unsolved">Unsolved</option>
+                            </select>
+                        </div>
+                        <div class="search">
+                            <input type="text" placeholder="Search questions">
+                            <button>Search</button>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Title</th>
+                                <th>Solution</th>
+                                <th>Acceptance</th>
+                                <th>Difficulty</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="problem-list">
+                            <tr data-categories="dsa array">
+                                <td class="status"><i class="fas fa-check-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(1)">1. Two Sum</div>
+                                    <div id="details-1" class="problem-details">
+                                        <div class="problem-details-content">
+                                            Given an array of integers, find the indices of the two numbers such that
+                                            they add
+                                            up to a specified target.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>80.5%</td>
+                                <td class="difficulty">Medium</td>
+                                <td>2024-01-31</td>
+                            </tr>
+
+
+
+                            <tr data-categories="system-design">
+                                <td class="status"><i class="fas fa-check-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(2)">1114. Print in Order</div>
+                                    <div id="details-2" class="problem-details">
+                                        <div class="problem-details-content">
+                                            Implement a mechanism to print "first", "second", and "third" in order,
+                                            using three
+                                            different threads.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>70.2%</td>
+                                <td class="difficulty">Easy</td>
+                                <td>2024-01-30</td>
+                            </tr>
+
+
+
+                            <tr data-categories="dsa interview">
+                                <td class="status"><i class="far fa-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(3)">206. Reverse Linked List</div>
+                                    <div id="details-3" class="problem-details">
+                                        <div class="problem-details-content">
+                                            Given the head of a singly linked list, reverse the list, and return the
+                                            reversed
+                                            list.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>68.9%</td>
+                                <td class="difficulty">Easy</td>
+                                <td>2024-01-29</td>
+                            </tr>
+
+
+
+                            <tr data-categories="dsa dynamic-programming interview">
+                                <td class="status"><i class="far fa-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(4)">53. Maximum Subarray</div>
+                                    <div id="details-4" class="problem-details">
+                                        <div class="problem-details-content">
+                                            Given an integer array nums, find the contiguous subarray (containing at
+                                            least one
+                                            number) which has the largest sum and return its sum.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>49.5%</td>
+                                <td class="difficulty">Medium</td>
+                                <td>2024-01-28</td>
+                            </tr>
+
+
+
+                            <tr data-categories="dsa greedy interview">
+                                <td class="status"><i class="far fa-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(5)">121. Best Time to Buy and Sell
+                                        Stock
+                                    </div>
+                                    <div id="details-5" class="problem-details">
+                                        <div class="problem-details-content">
+                                            You are given an array prices where prices[i] is the price of a given stock
+                                            on the
+                                            ith day. You want to maximize your profit by choosing a single day to buy
+                                            one stock
+                                            and choosing a different day in the future to sell that stock.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>54.2%</td>
+                                <td class="difficulty">Easy</td>
+                                <td>2024-01-27</td>
+                            </tr>
+
+
+
+                            <tr data-categories="dsa array hash-table interview">
+                                <td class="status"><i class="far fa-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(6)">1. Two Sum</div>
+                                    <div id="details-6" class="problem-details">
+                                        <div class="problem-details-content">
+                                            Given an array of integers nums and an integer target, return indices of the
+                                            two
+                                            numbers such that they add up to target.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>48.1%</td>
+                                <td class="difficulty">Easy</td>
+                                <td>2024-01-26</td>
+                            </tr>
+
+
+                            <tr data-categories="dsa string stack interview">
+                                <td class="status"><i class="far fa-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(7)">20. Valid Parentheses</div>
+                                    <div id="details-7" class="problem-details">
+                                        <div class="problem-details-content">
+                                            Given a string s containing just the characters '(', ')', '{', '}', '[' and
+                                            ']',
+                                            determine if the input string is valid.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>40.2%</td>
+                                <td class="difficulty">Easy</td>
+                                <td>2024-01-25</td>
+                            </tr>
+
+                            <tr data-categories="dsa graph dfs bfs interview">
+                                <td class="status"><i class="far fa-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(8)">200. Number of Islands</div>
+                                    <div id="details-8" class="problem-details">
+                                        <div class="problem-details-content">
+                                            Given an m x n 2D binary grid grid which represents a map of '1's (land) and
+                                            '0's
+                                            (water), return the number of islands.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>52.7%</td>
+                                <td class="difficulty">Medium</td>
+                                <td>2024-01-24</td>
+                            </tr>
+
+
+
+                            <tr data-categories="system-design interview">
+                                <td class="status"><i class="far fa-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(9)">146. LRU Cache</div>
+                                    <div id="details-9" class="problem-details">
+                                        <div class="problem-details-content">
+                                            Design a data structure that follows the constraints of a Least Recently
+                                            Used (LRU)
+                                            cache.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>39.8%</td>
+                                <td class="difficulty">Medium</td>
+                                <td>2024-01-23</td>
+                            </tr>
+
+                            <!-- Modal structure -->
+                            <div id="codeModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close-btn">&times;</span>
+                                    <h3>Submit Your Code</h3>
+
+                                    <!-- Language Selector with icons -->
+                                    <div class="language-select-container">
+                                        <select id="codeLanguage" class="code-language-select">
+                                            <option value="python">Python</option>
+                                            <option value="javascript">JavaScript</option>
+                                            <option value="java">Java</option>
+                                            <option value="cpp">C++</option>
+                                        </select>
+                                        <button id="formatCodeBtn" title="Format Code">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Code Editor Container -->
+                                    <div class="code-editor-container">
+                                        <textarea id="codeInput" placeholder="Write your code here..."></textarea>
+                                        <div class="editor-actions">
+                                            <span id="autoSaveStatus">Auto-saving...</span>
+                                            <button id="runCodeBtn">Run Code</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Test Cases Section -->
+                                    <div class="test-cases-section">
+                                        <h4>Test Cases</h4>
+                                        <div class="test-case-list">
+                                            <div class="test-case">
+                                                <input type="text" placeholder="Input" class="test-input">
+                                                <input type="text" placeholder="Expected Output" class="test-output">
+                                                <button class="run-test-btn">Run Test</button>
+                                            </div>
+                                            <button id="addTestCaseBtn">+ Add Test Case</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Results Section -->
+                                    <div class="results-section" style="display: none;">
+                                        <h4>Results</h4>
+                                        <div class="result-details">
+                                            <div>Runtime: <span id="runtime">0ms</span></div>
+                                            <div>Memory Usage: <span id="memoryUsage">0MB</span></div>
+                                            <div>Status: <span id="executionStatus">-</span></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Error Message Display -->
+                                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+                                    <!-- Submit Button and Status -->
+                                    <div class="modal-footer">
+                                        <button id="submitCodeBtn" class="submit-btn">
+                                            <i class="fas fa-paper-plane"></i> Submit
+                                        </button>
+                                        <div id="submissionStatus"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <tr data-categories="dsa dynamic-programming stack interview">
+                                <td class="status"><i class="far fa-circle"></i></td>
+                                <td>
+                                    <div class="problem-title" onclick="toggleDetails(10)">42. Trapping Rain Water</div>
+                                    <div id="details-10" class="problem-details">
+                                        <div class="problem-details-content">
+                                            Given n non-negative integers representing an elevation map where the width
+                                            of each bar is 1, compute how much water it can trap after raining.
+                                            <button class="open-modal-btn">Submit Code</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><i class="fas fa-file-alt"></i></td>
+                                <td>55.1%</td>
+                                <td class="difficulty">Hard</td>
+                                <td>2024-01-22</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                    <div id="codeModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn">&times;</span>
+                            <h3>Submit Your Code</h3>
+
+                            <!-- Language Selector -->
+                            <select id="codeLanguage" class="code-language-select">
+                                <option value="python">Python</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="java">Java</option>
+                                <option value="cpp">C++</option>
+                            </select>
+
+                            <!-- Code Input -->
+                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
+
+                            <!-- Error Message Display -->
+                            <div id="errorMessage" class="error-message"
+                                style="display: none; color: #d32f2f; margin: 10px 0;"></div>
+
+                            <!-- Submission Controls -->
+                            <div class="modal-footer">
+                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
+                                <div id="submissionStatus" style="display: none; margin-left: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pagination">
+                        <select>
+                            <option>50 / page</option>
+                        </select>
+                        <div class="pages">
+                            <button>&lt;</button>
+                            <button>1</button>
+                            <button>&gt;</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>Data Structures and Algorithms</h3>
-                    <p>Core Concepts (DSAG)</p>
-                    <button onclick="filterProblems('dsa')">Start Learning</button>
-                </div>
-                <div class="card">
-                    <h3>Top Questions</h3>
-                    <p>Most common questions...</p>
-                    <button onclick="filterProblems('interview')">Get Started</button>
+                <div class="sidebar">
+                    <div class="calendar">
+                        <div class="month">
+                            <button onclick="changeMonth(-1)">&lt;</button>
+                            <span id="current-month">January 2024</span>
+                            <button onclick="changeMonth(1)">&gt;</button>
+                        </div>
+                        <div class="days" id="calendar-days">
+                            <!-- Days will be dynamically added here -->
+                        </div>
+                    </div>
+                    <div id="daily-problem">
+                        <h3>Daily Problem</h3>
+                        <p id="daily-problem-content"></p>
+                    </div>
+                    <div class="tags">
+                        <button>All Topics</button>
+                        <button>Algorithms</button>
+                        <button>Database</button>
+                        <button>Shell</button>
+                        <button>Concurrency</button>
+                        <button>JavaScript</button>
+                    </div>
+                    <div class="profile">
+                        <div class="profile-header">
+                            <img src="img/Dylan.jpg" alt="Profile Avatar" class="profile-avatar" width="60"
+                                height="60" />
+                            <div class="profile-info">
+                                <h3>Geng Yue</h3>
+                                <p>Information Technology</p>
+                                <p>Year 1 | Student ID: 2403880d</p>
+                            </div>
+                        </div>
+                        <div class="profile-stats">
+                            <p><strong>Challenges Attempted:</strong> 150</p>
+                            <p><strong>Average Rank:</strong> 8.5</p>
+                            <p><strong>Top 4 Finishes:</strong> 45%</p>
+                            <p><strong>Completion Rate:</strong> 75%</p>
+                            <p><strong>Average Difficulty Level:</strong> 9.2</p>
+                            <p><strong>Average Score:</strong> 850</p>
+                            <p><strong>Average Problem Complexity:</strong> 3.5</p>
+                            <p><strong>Average Code Length:</strong> 120.5 lines</p>
+                        </div>
+                    </div>
+                    <div id="profile-chart">
+                        <canvas id="profilePieChart"></canvas>
+                    </div>
                 </div>
             </div>
-            <h2>Study Plan</h2>
-            <div class="topics">
-                <div class="topic" onclick="filterProblems('array')">Array</div>
-                <div class="topic" onclick="filterProblems('tree')">Tree</div>
-                <div class="topic" onclick="filterProblems('string')">String</div>
-                <div class="topic" onclick="filterProblems('hash-table')">Hash Table</div>
-                <div class="topic" onclick="filterProblems('dynamic-programming')">Dynamic Programming</div>
-                <div class="topic" onclick="filterProblems('math')">Math</div>
-                <div class="topic" onclick="filterProblems('sorting')">Sorting</div>
-                <div class="topic" onclick="filterProblems('greedy')">Greedy</div>
-                <div class="topic" onclick="showAllTopics()">All Topics</div>
+            <div class="footer">
+                <a href="#">Copyright © 2024 IIThub</a>
+                <a href="#">Help Center</a>
+                <a href="#">Jobs</a>
+                <a href="#">Bug Bounty</a>
+                <a href="#">Assessment</a>
+                <a href="#">Students</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy Policy</a>
             </div>
-            <div class="filters">
-                <div class="left">
-                    <select id="difficulty-filter">
-                        <option value="all">All Difficulties</option>
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                    </select>
-                    <select id="status-filter">
-                        <option value="all">All Status</option>
-                        <option value="solved">Solved</option>
-                        <option value="unsolved">Unsolved</option>
-                    </select>
-                </div>
-                <div class="search">
-                    <input type="text" placeholder="Search questions">
-                    <button>Search</button>
-                </div>
-            </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Title</th>
-                        <th>Solution</th>
-                        <th>Acceptance</th>
-                        <th>Difficulty</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="problem-list">
-                    <tr data-categories="dsa array">
-                        <td class="status"><i class="fas fa-check-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(1)">1. Two Sum</div>
-                            <div id="details-1" class="problem-details">
-                                <div class="problem-details-content">
-                                    Given an array of integers, find the indices of the two numbers such that they add
-                                    up to a specified target.
-                                    <button class="open-modal-btn">Submit Code</button>
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>80.5%</td>
-                        <td class="difficulty">Medium</td>
-                        <td>2024-01-31</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <tr data-categories="system-design">
-                        <td class="status"><i class="fas fa-check-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(2)">1114. Print in Order</div>
-                            <div id="details-2" class="problem-details">
-                                <div class="problem-details-content">
-                                    Implement a mechanism to print "first", "second", and "third" in order, using three
-                                    different threads.
-                                    <button class="open-modal-btn">Submit Code</button>
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>70.2%</td>
-                        <td class="difficulty">Easy</td>
-                        <td>2024-01-30</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <tr data-categories="dsa interview">
-                        <td class="status"><i class="far fa-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(3)">206. Reverse Linked List</div>
-                            <div id="details-3" class="problem-details">
-                                <div class="problem-details-content">
-                                    Given the head of a singly linked list, reverse the list, and return the reversed
-                                    list.
-                                    <button class="open-modal-btn">Submit Code</button>
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>68.9%</td>
-                        <td class="difficulty">Easy</td>
-                        <td>2024-01-29</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <tr data-categories="dsa dynamic-programming interview">
-                        <td class="status"><i class="far fa-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(4)">53. Maximum Subarray</div>
-                            <div id="details-4" class="problem-details">
-                                <div class="problem-details-content">
-                                    Given an integer array nums, find the contiguous subarray (containing at least one
-                                    number) which has the largest sum and return its sum.
-                                    <button class="open-modal-btn">Submit Code</button>
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>49.5%</td>
-                        <td class="difficulty">Medium</td>
-                        <td>2024-01-28</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <tr data-categories="dsa greedy interview">
-                        <td class="status"><i class="far fa-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(5)">121. Best Time to Buy and Sell Stock
-                            </div>
-                            <div id="details-5" class="problem-details">
-                                <div class="problem-details-content">
-                                    You are given an array prices where prices[i] is the price of a given stock on the
-                                    ith day. You want to maximize your profit by choosing a single day to buy one stock
-                                    and choosing a different day in the future to sell that stock.
-                                    <button class="open-modal-btn">Submit Code</button>
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>54.2%</td>
-                        <td class="difficulty">Easy</td>
-                        <td>2024-01-27</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <tr data-categories="dsa array hash-table interview">
-                        <td class="status"><i class="far fa-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(6)">1. Two Sum</div>
-                            <div id="details-6" class="problem-details">
-                                <div class="problem-details-content">
-                                    Given an array of integers nums and an integer target, return indices of the two
-                                    numbers such that they add up to target.
-                                    <button class="open-modal-btn">Submit Code</button>
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>48.1%</td>
-                        <td class="difficulty">Easy</td>
-                        <td>2024-01-26</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <tr data-categories="dsa string stack interview">
-                        <td class="status"><i class="far fa-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(7)">20. Valid Parentheses</div>
-                            <div id="details-7" class="problem-details">
-                                <div class="problem-details-content">
-                                    Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
-                                    determine if the input string is valid.
-                                    <button class="open-modal-btn">Submit Code</button>
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>40.2%</td>
-                        <td class="difficulty">Easy</td>
-                        <td>2024-01-25</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <tr data-categories="dsa graph dfs bfs interview">
-                        <td class="status"><i class="far fa-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(8)">200. Number of Islands</div>
-                            <div id="details-8" class="problem-details">
-                                <div class="problem-details-content">
-                                    Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's
-                                    (water), return the number of islands.
-                                    <button class="open-modal-btn">Submit Code</button>
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>52.7%</td>
-                        <td class="difficulty">Medium</td>
-                        <td>2024-01-24</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <tr data-categories="system-design interview">
-                        <td class="status"><i class="far fa-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(9)">146. LRU Cache</div>
-                            <div id="details-9" class="problem-details">
-                                <div class="problem-details-content">
-                                    Design a data structure that follows the constraints of a Least Recently Used (LRU)
-                                    cache.
-                                    <button class="open-modal-btn">Submit Code</button>
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>39.8%</td>
-                        <td class="difficulty">Medium</td>
-                        <td>2024-01-23</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <tr data-categories="dsa dynamic-programming stack interview">
-                        <td class="status"><i class="far fa-circle"></i></td>
-                        <td>
-                            <div class="problem-title" onclick="toggleDetails(10)">42. Trapping Rain Water</div>
-                            <div id="details-10" class="problem-details">
-                                <div class="problem-details-content">
-                                    Given n non-negative integers representing an elevation map where the width of each
-                                    bar is 1, compute how much water it can trap after raining.
-                                </div>
-                            </div>
-                        </td>
-                        <td><i class="fas fa-file-alt"></i></td>
-                        <td>55.1%</td>
-                        <td class="difficulty">Hard</td>
-                        <td>2024-01-22</td>
-                    </tr>
-
-                    <!-- Modal structure -->
-                    <div id="codeModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Submit Your Code</h3>
-                            <textarea id="codeInput" placeholder="Write your code here..."></textarea>
-                            <div class="modal-footer">
-                                <button id="submitCodeBtn" class="submit-btn">Submit</button>
-                                <p id="submissionStatus" style="display: none; color: green;">Submission successful!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </tbody>
-            </table>
-            <div class="pagination">
-                <select>
-                    <option>50 / page</option>
-                </select>
-                <div class="pages">
-                    <button>&lt;</button>
-                    <button>1</button>
-                    <button>&gt;</button>
-                </div>
-            </div>
-        </div>
-        <div class="sidebar">
-            <div class="calendar">
-                <div class="month">
-                    <button onclick="changeMonth(-1)">&lt;</button>
-                    <span id="current-month">January 2024</span>
-                    <button onclick="changeMonth(1)">&gt;</button>
-                </div>
-                <div class="days" id="calendar-days">
-                    <!-- Days will be dynamically added here -->
-                </div>
-            </div>
-            <div id="daily-problem">
-                <h3>Daily Problem</h3>
-                <p id="daily-problem-content"></p>
-            </div>
-            <div class="tags">
-                <button>All Topics</button>
-                <button>Algorithms</button>
-                <button>Database</button>
-                <button>Shell</button>
-                <button>Concurrency</button>
-                <button>JavaScript</button>
-            </div>
-            <div class="profile">
-                <div class="profile-header">
-                    <img src="img/Dylan.jpg"
-                        alt="Profile Avatar" class="profile-avatar" width="60" height="60" />
-                    <div class="profile-info">
-                        <h3>Geng Yue</h3>
-                        <p>Information Technology</p>
-                        <p>Year 1 | Student ID: 2403880d</p>
-                    </div>
-                </div>
-                <div class="profile-stats">
-                    <p><strong>Challenges Attempted:</strong> 150</p>
-                    <p><strong>Average Rank:</strong> 8.5</p>
-                    <p><strong>Top 4 Finishes:</strong> 45%</p>
-                    <p><strong>Completion Rate:</strong> 75%</p>
-                    <p><strong>Average Difficulty Level:</strong> 9.2</p>
-                    <p><strong>Average Score:</strong> 850</p>
-                    <p><strong>Average Problem Complexity:</strong> 3.5</p>
-                    <p><strong>Average Code Length:</strong> 120.5 lines</p>
-                </div>
-            </div>
-            <div id="profile-chart">
-                <canvas id="profilePieChart"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <a href="#">Copyright © 2024 IIThub</a>
-        <a href="#">Help Center</a>
-        <a href="#">Jobs</a>
-        <a href="#">Bug Bounty</a>
-        <a href="#">Assessment</a>
-        <a href="#">Students</a>
-        <a href="#">Terms</a>
-        <a href="#">Privacy Policy</a>
-    </div>
-    <script>
-        function toggleDetails(id) {
-            var details = document.getElementById('details-' + id);
-            details.classList.toggle('active');
-        }
-
-        let currentDate = new Date();
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
-        function updateCalendar() {
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            document.getElementById('current-month').textContent = `${monthNames[month]} ${year}`;
-
-            const daysContainer = document.getElementById('calendar-days');
-            daysContainer.innerHTML = '';
-
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-
-            for (let i = 0; i < firstDay.getDay(); i++) {
-                daysContainer.appendChild(document.createElement('div'));
-            }
-
-            for (let i = 1; i <= lastDay.getDate(); i++) {
-                const dayElement = document.createElement('div');
-                dayElement.textContent = i;
-                dayElement.addEventListener('click', () => {
-                    document.querySelectorAll('.calendar .days div').forEach(el => el.classList.remove('active'));
-                    dayElement.classList.add('active');
-                    showDailyProblem(year, month, i);
-                });
-                if (i === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
-                    dayElement.classList.add('active');
+            <script>
+                function toggleDetails(id) {
+                    var details = document.getElementById('details-' + id);
+                    details.classList.toggle('active');
                 }
-                daysContainer.appendChild(dayElement);
-            }
-        }
 
-        function changeMonth(delta) {
-            currentDate.setMonth(currentDate.getMonth() + delta);
-            updateCalendar();
-        }
+                let currentDate = new Date();
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
 
-        function showDailyProblem(year, month, day) {
-            const date = new Date(year, month, day);
-            const problemIndex = (date.getTime() / 86400000) % 10;
-            const problem = document.querySelector(`.table tbody tr:nth-child(${problemIndex + 1}) .problem-title`).textContent;
-            document.getElementById('daily-problem-content').textContent = `Problem for ${date.toDateString()}: ${problem}`;
-            document.getElementById('daily-problem').style.display = 'block';
-        }
+                function updateCalendar() {
+                    const year = currentDate.getFullYear();
+                    const month = currentDate.getMonth();
+                    document.getElementById('current-month').textContent = `${monthNames[month]} ${year}`;
 
-        updateCalendar();
+                    const daysContainer = document.getElementById('calendar-days');
+                    daysContainer.innerHTML = '';
 
-        // Pie Chart
-        const ctx = document.getElementById('profilePieChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Challenges Attempted', 'Top 4 Finishes', 'Completion Rate', 'Average Score'],
-                datasets: [{
-                    data: [150, 45, 75, 85],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.8)',
-                        'rgba(54, 162, 235, 0.8)',
-                        'rgba(255, 206, 86, 0.8)',
-                        'rgba(75, 192, 192, 0.8)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Profile Statistics'
+                    const firstDay = new Date(year, month, 1);
+                    const lastDay = new Date(year, month + 1, 0);
+
+                    for (let i = 0; i < firstDay.getDay(); i++) {
+                        daysContainer.appendChild(document.createElement('div'));
+                    }
+
+                    for (let i = 1; i <= lastDay.getDate(); i++) {
+                        const dayElement = document.createElement('div');
+                        dayElement.textContent = i;
+                        dayElement.addEventListener('click', () => {
+                            document.querySelectorAll('.calendar .days div').forEach(el => el.classList.remove('active'));
+                            dayElement.classList.add('active');
+                            showDailyProblem(year, month, i);
+                        });
+                        if (i === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
+                            dayElement.classList.add('active');
+                        }
+                        daysContainer.appendChild(dayElement);
                     }
                 }
-            }
-        });
 
-        function filterProblems(category) {
-            const difficultyFilter = document.getElementById('difficulty-filter').value;
-            const statusFilter = document.getElementById('status-filter').value;
-
-            const problems = document.querySelectorAll('#problem-list tr');
-            problems.forEach(problem => {
-                const categories = problem.dataset.categories.split(' ');
-                const difficulty = problem.querySelector('.difficulty').textContent.toLowerCase();
-                const status = problem.querySelector('.status i').classList.contains('fa-check-circle') ? 'solved' : 'unsolved';
-
-                const categoryMatch = category === 'all' || categories.includes(category);
-                const difficultyMatch = difficultyFilter === 'all' || difficulty === difficultyFilter;
-                const statusMatch = statusFilter === 'all' || status === statusFilter;
-
-                if (categoryMatch && difficultyMatch && statusMatch) {
-                    problem.style.display = '';
-                } else {
-                    problem.style.display = 'none';
+                function changeMonth(delta) {
+                    currentDate.setMonth(currentDate.getMonth() + delta);
+                    updateCalendar();
                 }
-            });
 
-            // Update active topic
-            document.querySelectorAll('.topics .topic').forEach(topic => {
-                topic.classList.remove('active');
-                if (topic.textContent.toLowerCase() === category || (category === 'all' && topic.textContent === 'All Topics')) {
-                    topic.classList.add('active');
+                function showDailyProblem(year, month, day) {
+                    const date = new Date(year, month, day);
+                    const problemIndex = (date.getTime() / 86400000) % 10;
+                    const problem = document.querySelector(`.table tbody tr:nth-child(${problemIndex + 1}) .problem-title`).textContent;
+                    document.getElementById('daily-problem-content').textContent = `Problem for ${date.toDateString()}: ${problem}`;
+                    document.getElementById('daily-problem').style.display = 'block';
                 }
-            });
-        }
 
-        function showAllTopics() {
-            document.getElementById('difficulty-filter').value = 'all';
-            document.getElementById('status-filter').value = 'all';
-            filterProblems('all');
-        }
+                updateCalendar();
 
-        document.getElementById('difficulty-filter').addEventListener('change', () => filterProblems('all'));
-        document.getElementById('status-filter').addEventListener('change', () => filterProblems('all'));
+                // Pie Chart
+                const ctx = document.getElementById('profilePieChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Challenges Attempted', 'Top 4 Finishes', 'Completion Rate', 'Average Score'],
+                        datasets: [{
+                            data: [150, 45, 75, 85],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.8)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 206, 86, 0.8)',
+                                'rgba(75, 192, 192, 0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Profile Statistics'
+                            }
+                        }
+                    }
+                });
 
-        // Initialize with all problems visible
-        filterProblems('all');
+                function filterProblems(category) {
+                    const difficultyFilter = document.getElementById('difficulty-filter').value;
+                    const statusFilter = document.getElementById('status-filter').value;
 
-        // Add event listeners to topic buttons
-        document.querySelectorAll('.topics .topic').forEach(topic => {
-            topic.addEventListener('click', function () {
-                if (this.textContent === 'All Topics') {
-                    showAllTopics();
-                } else {
-                    filterProblems(this.textContent.toLowerCase());
+                    const problems = document.querySelectorAll('#problem-list tr');
+                    problems.forEach(problem => {
+                        const categories = problem.dataset.categories.split(' ');
+                        const difficulty = problem.querySelector('.difficulty').textContent.toLowerCase();
+                        const status = problem.querySelector('.status i').classList.contains('fa-check-circle') ? 'solved' : 'unsolved';
+
+                        const categoryMatch = category === 'all' || categories.includes(category);
+                        const difficultyMatch = difficultyFilter === 'all' || difficulty === difficultyFilter;
+                        const statusMatch = statusFilter === 'all' || status === statusFilter;
+
+                        if (categoryMatch && difficultyMatch && statusMatch) {
+                            problem.style.display = '';
+                        } else {
+                            problem.style.display = 'none';
+                        }
+                    });
+
+                    // Update active topic
+                    document.querySelectorAll('.topics .topic').forEach(topic => {
+                        topic.classList.remove('active');
+                        if (topic.textContent.toLowerCase() === category || (category === 'all' && topic.textContent === 'All Topics')) {
+                            topic.classList.add('active');
+                        }
+                    });
                 }
-            });
-        });
-        document.querySelectorAll('.open-modal-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.getElementById('codeModal').style.display = 'block';
-            });
-        });
 
-        document.querySelector('.close-btn').addEventListener('click', () => {
-            closeModal();
-        });
+                function showAllTopics() {
+                    document.getElementById('difficulty-filter').value = 'all';
+                    document.getElementById('status-filter').value = 'all';
+                    filterProblems('all');
+                }
 
-        document.getElementById('submitCodeBtn').addEventListener('click', () => {
-            document.getElementById('submissionStatus').style.display = 'block';
-            setTimeout(() => {
-                closeModal(); 
-            }, 5000);
-        });
+                document.getElementById('difficulty-filter').addEventListener('change', () => filterProblems('all'));
+                document.getElementById('status-filter').addEventListener('change', () => filterProblems('all'));
 
-        window.onclick = function (event) {
-            if (event.target === document.getElementById('codeModal')) {
-                closeModal();
-            }
-        };
+                // Initialize with all problems visible
+                filterProblems('all');
 
-        //reset!!!!!!!!!!!!!
-        function closeModal() {
-            document.getElementById('codeModal').style.display = 'none';
-            document.getElementById('submissionStatus').style.display = 'none'; 
-        }
+                // Add event listeners to topic buttons
+                document.querySelectorAll('.open-modal-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.getElementById('codeModal').style.display = 'block';
+                    });
+                });
 
-    </script>
+                function closeModal() {
+                    const modal = document.getElementById('codeModal');
+                    modal.style.display = 'none';
+                    resetModal();
+                }
+
+                // Add the ability to reset modal boxes
+                function resetModal() {
+                    const codeInput = document.getElementById('codeInput');
+                    const errorMessage = document.getElementById('errorMessage');
+                    const submissionStatus = document.getElementById('submissionStatus');
+                    const languageSelect = document.getElementById('codeLanguage');
+
+                    codeInput.value = '';
+                    errorMessage.style.display = 'none';
+                    errorMessage.textContent = '';
+                    submissionStatus.style.display = 'none';
+                    submissionStatus.textContent = '';
+                    languageSelect.selectedIndex = 0;
+                }
+
+                // Add code validation function
+                function validateCode(code, language) {
+                    if (!code.trim()) {
+                        throw new Error('Code cannot be empty');
+                    }
+
+                    if (code.length < 10) {
+                        throw new Error('Code must be at least 10 characters long');
+                    }
+
+                    switch (language) {
+                        case 'python':
+                            if (!code.includes('def ') && !code.includes('class ')) {
+                                throw new Error('Python code should contain at least one function or class definition');
+                            }
+                            break;
+                        case 'javascript':
+                            if (!code.includes('function') && !code.includes('=>')) {
+                                throw new Error('JavaScript code should contain at least one function definition');
+                            }
+                            break;
+                    }
+                }
+
+                // 修改提交按钮的事件处理
+                document.getElementById('submitCodeBtn').addEventListener('click', async () => {
+                    const codeInput = document.getElementById('codeInput');
+                    const languageSelect = document.getElementById('codeLanguage');
+                    const errorMessage = document.getElementById('errorMessage');
+                    const submissionStatus = document.getElementById('submissionStatus');
+                    const submitBtn = document.getElementById('submitCodeBtn');
+
+                    // 生成提交ID (基于时间戳和随机数)
+                    const submissionId = `SUB${Date.now().toString(36)}-${Math.random().toString(36).substr(2, 4)}`;
+
+                    // 重置状态
+                    errorMessage.style.display = 'none';
+                    submissionStatus.className = '';
+                    submissionStatus.style.display = 'none';
+                    
+                    // 添加加载状态
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+                    try {
+                        validateCode(codeInput.value, languageSelect.value);
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+
+                        // 成功状态
+                        submissionStatus.innerHTML = `
+                            <div class="submission-info">
+                                <div class="submission-id">ID: ${submissionId}</div>
+                                <div class="submission-message">Submission successful!</div>
+                            </div>
+                        `;
+                        submissionStatus.style.display = 'block';
+                        submissionStatus.classList.add('success');
+                        
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Submitted';
+
+                        setTimeout(() => {
+                            closeModal();
+                            // 重置按钮状态
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
+                        }, 1500);
+                    } catch (error) {
+                        // 错误状态
+                        errorMessage.textContent = error.message;
+                        errorMessage.style.display = 'block';
+                        submissionStatus.innerHTML = `
+                            <div class="submission-info">
+                                <div class="submission-id">ID: ${submissionId}</div>
+                                <div class="submission-message">Submission failed</div>
+                            </div>
+                        `;
+                        submissionStatus.style.display = 'block';
+                        submissionStatus.classList.add('error');
+                        
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
+                    }
+                });
+
+                // closing modal boxes
+                document.querySelector('.close-btn').addEventListener('click', closeModal);
+
+                // 代码格式化功能
+                document.getElementById('formatCodeBtn').addEventListener('click', () => {
+                    const codeInput = document.getElementById('codeInput');
+                    try {
+                        // 这里可以集成像Prettier这样的格式化库
+                        const formattedCode = formatCode(codeInput.value);
+                        codeInput.value = formattedCode;
+                    } catch (error) {
+                        showError('Code formatting failed: ' + error.message);
+                    }
+                });
+
+                // 自动保存功能
+                let autoSaveTimeout;
+                document.getElementById('codeInput').addEventListener('input', () => {
+                    clearTimeout(autoSaveTimeout);
+                    const autoSaveStatus = document.getElementById('autoSaveStatus');
+                    autoSaveStatus.textContent = 'Saving...';
+                    
+                    autoSaveTimeout = setTimeout(() => {
+                        const code = document.getElementById('codeInput').value;
+                        localStorage.setItem('savedCode', code);
+                        autoSaveStatus.textContent = 'All changes saved';
+                        setTimeout(() => {
+                            autoSaveStatus.textContent = '';
+                        }, 2000);
+                    }, 1000);
+                });
+
+                // 运行代码功能
+                document.getElementById('runCodeBtn').addEventListener('click', async () => {
+                    const code = document.getElementById('codeInput').value;
+                    const language = document.getElementById('codeLanguage').value;
+                    const resultsSection = document.querySelector('.results-section');
+                    
+                    try {
+                        resultsSection.style.display = 'block';
+                        document.getElementById('executionStatus').textContent = 'Running...';
+                        
+                        const result = await runCode(code, language);
+                        
+                        document.getElementById('runtime').textContent = result.runtime + 'ms';
+                        document.getElementById('memoryUsage').textContent = result.memory + 'MB';
+                        document.getElementById('executionStatus').textContent = 'Completed';
+                    } catch (error) {
+                        showError('Execution failed: ' + error.message);
+                    }
+                });
+
+                // 测试用例功能
+                document.getElementById('addTestCaseBtn').addEventListener('click', () => {
+                    const testCaseList = document.querySelector('.test-case-list');
+                    const newTestCase = document.createElement('div');
+                    newTestCase.className = 'test-case';
+                    newTestCase.innerHTML = `
+                        <input type="text" placeholder="Input" class="test-input">
+                        <input type="text" placeholder="Expected Output" class="test-output">
+                        <button class="run-test-btn">Run Test</button>
+                    `;
+                    testCaseList.insertBefore(newTestCase, document.getElementById('addTestCaseBtn'));
+                });
+
+                // 改进的代码验证
+                function validateCode(code, language) {
+                    if (!code.trim()) {
+                        throw new Error('代码不能为空');
+                    }
+
+                    const minLength = 10;
+                    if (code.length < minLength) {
+                        throw new Error(`代码至少需要${minLength}个字符`);
+                    }
+
+                    const languagePatterns = {
+                        python: {
+                            patterns: [/def\s+\w+\s*\(.*\)/, /class\s+\w+/],
+                            message: 'Python代码应包含至少一个函数或类定义'
+                        },
+                        javascript: {
+                            patterns: [/function\s+\w+\s*\(.*\)/, /=>\s*{/, /class\s+\w+/],
+                            message: 'JavaScript代码应包含至一个函数或类定义'
+                        },
+                        java: {
+                            patterns: [/public\s+class\s+\w+/, /private\s+\w+\s+\w+\s*\(.*\)/],
+                            message: 'Java代码应包含类定义和方法'
+                        },
+                        cpp: {
+                            patterns: [/\w+\s+\w+\s*\(.*\)/, /class\s+\w+/],
+                            message: 'C++代码应包含至少一个函数或类定义'
+                        }
+                    };
+
+                    const langPattern = languagePatterns[language];
+                    if (langPattern && !langPattern.patterns.some(pattern => pattern.test(code))) {
+                        throw new Error(langPattern.message);
+                    }
+                }
+
+                // 显示错误信息的辅助函数
+                function showError(message) {
+                    const errorMessage = document.getElementById('errorMessage');
+                    errorMessage.textContent = message;
+                    errorMessage.style.display = 'block';
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 5000);
+                }
+
+                // 代码执行函数
+                async function runCode(code, language) {
+                    const executionStatus = document.getElementById('executionStatus');
+                    const resultsSection = document.querySelector('.results-section');
+                    
+                    try {
+                        // 显示执行状态
+                        executionStatus.textContent = 'Running...';
+                        executionStatus.style.color = '#f39c12';
+                        
+                        // 验证代码基本格式
+                        validateCode(code, language);
+                        
+                        // 模拟代码执行（在实际项目中，这里应该是与后端API的通信）
+                        const result = await executeCode(code, language);
+                        
+                        // 显示执行结果
+                        displayResults(result);
+                        
+                        return result;
+                    } catch (error) {
+                        displayError(error);
+                        throw error;
+                    }
+                }
+
+                // 代码验证函数
+                function validateCode(code, language) {
+                    if (!code.trim()) {
+                        throw new Error('Code cannot be empty');
+                    }
+
+                    if (code.length < 10) {
+                        throw new Error('Code must be at least 10 characters long');
+                    }
+
+                    // 基本语法检查
+                    try {
+                        switch(language) {
+                            case 'javascript':
+                                new Function(code); // 尝试编译JavaScript代码
+                                break;
+                            case 'python':
+                                // 在实项目中需要后端验证Python语法
+                                if (!code.includes('def') && !code.includes('class')) {
+                                    throw new Error('Python code must contain function or class definition');
+                                }
+                                break;
+                            // 其他语言的验证...
+                        }
+                    } catch (e) {
+                        throw new Error(`Syntax Error: ${e.message}`);
+                    }
+                }
+
+                // 模拟代码执行函数（在实际项目中应该是API调用）
+                async function executeCode(code, language) {
+                    await new Promise(resolve => setTimeout(resolve, 1500)); // 模拟执行延迟
+                    
+                    try {
+                        let output;
+                        if (language === 'javascript') {
+                            // 在安全的环境中执行JavaScript代码
+                            const sandbox = new Function('return ' + code)();
+                            output = sandbox; // 实际项目中需要更安全的沙箱环境
+                        } else {
+                            // 其他语言需要后端执行
+                            output = "Code execution requires backend support";
+                        }
+
+                        return {
+                            success: true,
+                            runtime: Math.floor(Math.random() * 100) + 50,
+                            memory: (Math.random() * 5 + 35).toFixed(1),
+                            output: output,
+                            testsPassed: Math.floor(Math.random() * 3) + 8,
+                            totalTests: 10
+                        };
+                    } catch (error) {
+                        throw new Error(`Execution Error: ${error.message}`);
+                    }
+                }
+
+                // 显示执行结果
+                function displayResults(result) {
+                    const resultsSection = document.querySelector('.results-section');
+                    resultsSection.style.display = 'block';
+                    
+                    if (result.success) {
+                        resultsSection.innerHTML = `
+                            <h4>Execution Result <span class="success-badge">Success</span></h4>
+                            <div class="result-details">
+                                <div class="result-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Runtime</span>
+                                    <strong>${result.runtime} ms</strong>
+                                </div>
+                                <div class="result-item">
+                                    <i class="fas fa-memory"></i>
+                                    <span>Memory</span>
+                                    <strong>${result.memory} MB</strong>
+                                </div>
+                                <div class="result-item">
+                                    <i class="fas fa-vial"></i>
+                                    <span>Test Cases</span>
+                                    <strong>${result.testsPassed}/${result.totalTests}</strong>
+                                </div>
+                            </div>
+                            <div class="output-section">
+                                <div class="output-header">
+                                    <span>Output</span>
+                                    <button class="copy-btn" onclick="copyOutput()">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <pre class="output-content">${result.output}</pre>
+                            </div>
+                        `;
+                    }
+                }
+
+                // 显示错误信息
+                function displayError(error) {
+                    const resultsSection = document.querySelector('.results-section');
+                    resultsSection.style.display = 'block';
+                    resultsSection.innerHTML = `
+                        <h4>Execution Result <span class="error-badge">Failed</span></h4>
+                        <div class="error-details">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>${error.message}</span>
+                        </div>
+                    `;
+                }
+
+                // 添加复制输出结果功能
+                function copyOutput() {
+                    const outputContent = document.querySelector('.output-content').textContent;
+                    navigator.clipboard.writeText(outputContent).then(() => {
+                        const copyBtn = document.querySelector('.copy-btn');
+                        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied';
+                        setTimeout(() => {
+                            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                        }, 2000);
+                    });
+                }
+
+                // 添加代码格式化函数
+                function formatCode(code) {
+                    // 这里是一个简单的格式化实现
+                    // 实际项目中建议使用 prettier 或其他格式化库
+                    try {
+                        // 按语句分割
+                        const lines = code.split('\n');
+                        let indentLevel = 0;
+                        let formattedCode = '';
+
+                        for (let line of lines) {
+                            // 移除行首尾空格
+                            line = line.trim();
+                            
+                            // 处理缩进
+                            if (line.includes('}')) indentLevel = Math.max(0, indentLevel - 1);
+                            
+                            // 添加缩进
+                            if (line.length > 0) {
+                                formattedCode += '    '.repeat(indentLevel) + line + '\n';
+                            } else {
+                                formattedCode += '\n';
+                            }
+                            
+                            // 增加缩进级别
+                            if (line.includes('{')) indentLevel++;
+                        }
+
+                        return formattedCode;
+                    } catch (error) {
+                        throw new Error('代码格式化失败: ' + error.message);
+                    }
+                }
+
+                // 更新运行代码按钮的事件监听器
+                document.getElementById('runCodeBtn').addEventListener('click', async () => {
+                    const code = document.getElementById('codeInput').value;
+                    const language = document.getElementById('codeLanguage').value;
+                    const resultsSection = document.querySelector('.results-section');
+                    const executionStatus = document.getElementById('executionStatus');
+                    
+                    try {
+                        resultsSection.style.display = 'block';
+                        executionStatus.textContent = 'Running...';
+                        
+                        const result = await runCode(code, language);
+                        
+                        // 更新结果显示
+                        document.getElementById('runtime').textContent = result.runtime + 'ms';
+                        document.getElementById('memoryUsage').textContent = result.memory + 'MB';
+                        executionStatus.textContent = result.status;
+                        
+                        // 添加成功样式
+                        executionStatus.style.color = '#28a745';
+                    } catch (error) {
+                        // 显示错误信息
+                        executionStatus.textContent = 'Failed';
+                        executionStatus.style.color = '#dc3545';
+                        showError(error.message);
+                    }
+                });
+
+                // 更新测试用例运行功能
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('run-test-btn')) {
+                        const testCase = e.target.closest('.test-case');
+                        const input = testCase.querySelector('.test-input').value;
+                        const expectedOutput = testCase.querySelector('.test-output').value;
+                        
+                        // 模拟测试用例执行
+                        setTimeout(() => {
+                            const success = Math.random() > 0.3; // 70%的概率成功
+                            e.target.style.backgroundColor = success ? '#28a745' : '#dc3545';
+                            e.target.textContent = success ? 'Passed' : 'Failed';
+                            
+                            setTimeout(() => {
+                                e.target.style.backgroundColor = '#6c757d';
+                                e.target.textContent = 'Run Test';
+                            }, 2000);
+                        }, 1000);
+                    }
+                });
+
+                // 添加关闭按钮事件处理
+                document.querySelector('.close-btn').addEventListener('click', async (e) => {
+                    if (hasUnsavedChanges()) {
+                        const confirmed = await showConfirmDialog(
+                            'Unsaved Changes', 
+                            'You have unsaved changes. Are you sure you want to close?'
+                        );
+                        if (!confirmed) {
+                            e.preventDefault();
+                            return;
+                        }
+                    }
+                    clearEditor();
+                    closeModal();
+                });
+
+                // 检查是否有未保存的更改
+                function hasUnsavedChanges() {
+                    const currentCode = document.getElementById('codeInput').value;
+                    const savedCode = localStorage.getItem('savedCode');
+                    return currentCode && currentCode !== savedCode;
+                }
+
+                // 修改确认对话框函数
+                function showConfirmDialog(title, message) {
+                    return new Promise((resolve) => {
+                        const dialog = document.createElement('div');
+                        dialog.className = 'confirm-dialog';
+                        dialog.innerHTML = `
+                            <div class="confirm-dialog-content">
+                                <h3>${title}</h3>
+                                <p>${message}</p>
+                                <div class="confirm-dialog-buttons">
+                                    <button class="cancel-btn">Cancel</button>
+                                    <button class="confirm-btn">Close</button>
+                                </div>
+                            </div>
+                        `;
+
+                        document.body.appendChild(dialog);
+
+                        const confirmBtn = dialog.querySelector('.confirm-btn');
+                        const cancelBtn = dialog.querySelector('.cancel-btn');
+
+                        confirmBtn.addEventListener('click', () => {
+                            document.body.removeChild(dialog);
+                            resolve(true);
+                        });
+
+                        cancelBtn.addEventListener('click', () => {
+                            document.body.removeChild(dialog);
+                            resolve(false);
+                            // 重新显示模态框
+                            document.getElementById('codeModal').style.display = 'block';
+                        });
+                    });
+                }
+
+                // 清除编辑器内容
+                function clearEditor() {
+                    document.getElementById('codeInput').value = '';
+                    localStorage.removeItem('savedCode');
+                }
+
+                // 关闭模态框
+                function closeModal() {
+                    document.getElementById('codeModal').style.display = 'none';
+                }
+
+            </script>
 </body>
 
 </html>
