@@ -42,31 +42,133 @@
     }
 
     .study-plan {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
     }
 
     .study-plan .card {
-        width: 32%;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
     }
 
-    .study-plan .card h3 {
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: white;
+    }
+
+    .system-design-icon { background: #2196f3; }
+    .algorithms-icon { background: #4caf50; }
+    .questions-icon { background: #ff9800; }
+
+    .card h3 {
+        font-size: 20px;
+        margin: 0;
+        color: #1a1a1a;
+    }
+
+    .card-content {
+        flex: 1;
+    }
+
+    .card p {
+        color: #666;
         margin: 10px 0;
+        line-height: 1.5;
     }
 
-    .study-plan .card button {
-        padding: 10px 20px;
-        background-color: #ff9800;
-        color: #fff;
-        border: none;
+    .card-tags {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+
+    .card-tag {
+        padding: 4px 8px;
+        background: #f0f0f0;
         border-radius: 4px;
+        font-size: 12px;
+        color: #666;
+    }
+
+    .card-stats {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .card-stat {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .card button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-weight: 500;
         cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .system-design-btn {
+        background: #e3f2fd;
+        color: #1976d2;
+    }
+
+    .system-design-btn:hover {
+        background: #bbdefb;
+    }
+
+    .algorithms-btn {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .algorithms-btn:hover {
+        background: #c8e6c9;
+    }
+
+    .questions-btn {
+        background: #fff3e0;
+        color: #f57c00;
+    }
+
+    .questions-btn:hover {
+        background: #ffe0b2;
     }
 
     .topics {
@@ -214,16 +316,27 @@
         position: absolute;
         bottom: 10px;
         right: 10px;
-        padding: 5px 10px;
-        background-color: #ff9800;
-        color: #fff;
+        min-width: 100px;
+        height: 36px;
+        background: #28a745;
+        color: white;
         border: none;
         border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
         cursor: pointer;
-        transition: background-color 0.3s ease;
-        display: inline-block;
-        min-width: 100px;
-        box-sizing: border-box;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .open-modal-btn:hover {
+        background: #218838;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     .close-btn {
@@ -236,42 +349,59 @@
     /* Styling for the modal footer */
     .modal-footer {
         display: flex;
-        justify-content: flex-start;
-        margin-top: 10px;
+        align-items: center;
+        gap: 20px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #e9ecef;
     }
 
     .submit-btn {
-        padding: 5px 10px;
-        background-color: #ff9800;
-        color: #fff;
+        min-width: 120px;
+        height: 40px;
+        background: #28a745;
+        color: white;
         border: none;
         border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
         cursor: pointer;
-        transition: background-color 0.3s ease;
-        display: inline-block;
-        width: 120px;
-        height: 40px;
-        box-sizing: border-box;
-        text-align: center;
-        line-height: 30px;
-        overflow: hidden;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
     }
-
 
     .submit-btn:hover {
-        background-color: #e68a00;
+        background: #218838;
+        transform: translateY(-1px);
     }
 
-    .submit-btn:active {
+    .submit-btn:disabled {
+        background: #a8d5b3;
+        cursor: not-allowed;
         transform: none;
     }
 
-    .modal-footer {
-        display: flex;
-        justify-content: flex-start;
-        margin-top: 10px;
+    #submissionStatus {
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        display: none;
     }
 
+    #submissionStatus.success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    #submissionStatus.error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
 
     .table {
         width: 100%;
@@ -326,6 +456,8 @@
 
     .problem-details-content {
         padding: 20px;
+        padding-bottom: 56px;
+        position: relative;
     }
 
     .pagination {
@@ -354,6 +486,34 @@
         border-radius: 4px;
         cursor: pointer;
         margin: 0 5px;
+    }
+
+    .code-language-select {
+        width: 150px;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+    }
+
+    .error-message {
+        background-color: #ffebee;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    #submissionStatus.success {
+        color: #4caf50;
+    }
+
+    #submissionStatus.error {
+        color: #d32f2f;
+    }
+
+    .submit-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
     }
 
     .sidebar {
@@ -619,4 +779,474 @@
     .main-content {
         flex: 1;
         background-color: #f5f5f5;
+    }
+
+    /* 代码模态框样式改进 */
+    .modal-content {
+        max-width: 800px;
+        width: 90%;
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* 语言选择器容器 */
+    .language-select-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .code-language-select {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        background: #f8f9fa;
+    }
+
+    #formatCodeBtn {
+        padding: 8px 12px;
+        background: #f1f3f5;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    #formatCodeBtn:hover {
+        background: #e9ecef;
+        border-color: #ced4da;
+    }
+
+    /* 代码编辑器容器 */
+    .code-editor-container {
+        margin: 15px 0;
+        position: relative;
+    }
+
+    #codeInput {
+        width: 100%;
+        min-height: 200px;
+        padding: 12px;
+        font-family: 'Consolas', 'Monaco', monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #f8f9fa;
+        resize: vertical;
+    }
+
+    .editor-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+    }
+
+    #autoSaveStatus {
+        font-size: 12px;
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    #runCodeBtn {
+        padding: 6px 12px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+    #runCodeBtn:hover {
+        background: #218838;
+    }
+
+    /* 测试用例部分 */
+    .test-cases-section {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 15px 0;
+    }
+
+    .test-cases-section h4 {
+        margin: 0 0 12px 0;
+        color: #343a40;
+    }
+
+    .test-case {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .test-case input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .run-test-btn {
+        padding: 6px 12px;
+        background: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+    .run-test-btn:hover {
+        background: #5a6268;
+    }
+
+    #addTestCaseBtn {
+        width: 100%;
+        padding: 8px;
+        background: #e9ecef;
+        border: 1px dashed #adb5bd;
+        border-radius: 4px;
+        color: #495057;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    #addTestCaseBtn:hover {
+        background: #dee2e6;
+        border-color: #6c757d;
+    }
+
+    /* 结果部分 */
+    .results-section {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .success-badge {
+        background: #28a745;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-left: 10px;
+    }
+
+    .error-badge {
+        background: #dc3545;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-left: 10px;
+    }
+
+    .result-details {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .result-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 6px;
+    }
+
+    .result-item i {
+        font-size: 24px;
+        color: #6c757d;
+        margin-bottom: 8px;
+    }
+
+    .result-item span {
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .result-item strong {
+        color: #212529;
+        font-size: 18px;
+    }
+
+    .output-section {
+        background: #f8f9fa;
+        border-radius: 6px;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .output-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .copy-btn {
+        background: none;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 4px 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+        background: #e9ecef;
+    }
+
+    .output-content {
+        background: #fff;
+        padding: 15px;
+        border-radius: 4px;
+        font-family: monospace;
+        margin: 0;
+        white-space: pre-wrap;
+    }
+
+    .error-details {
+        background: #fff3cd;
+        color: #856404;
+        padding: 15px;
+        border-radius: 6px;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* 成功动画 */
+    @keyframes successPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .animate-success {
+        animation: successPulse 0.5s ease-in-out;
+    }
+
+    /* 应式调整 */
+    @media (max-width: 768px) {
+        .result-details {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* 更新结果显示样式 */
+    .performance-note {
+        color: #6c757d;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    .output-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .expand-btn {
+        background: none;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 4px 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .expand-btn:hover {
+        background: #e9ecef;
+    }
+
+    .success-footer {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #e9ecef;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .success-message {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #28a745;
+        font-weight: 500;
+    }
+
+    .success-message i {
+        font-size: 20px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .next-btn, .share-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+    }
+
+    .next-btn {
+        background: #28a745;
+        color: white;
+    }
+
+    .next-btn:hover {
+        background: #218838;
+    }
+
+    .share-btn {
+        background: #f8f9fa;
+        color: #495057;
+        border: 1px solid #dee2e6;
+    }
+
+    .share-btn:hover {
+        background: #e9ecef;
+    }
+
+    .output-content {
+        font-family: 'Consolas', 'Monaco', monospace;
+        line-height: 1.5;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 4px;
+        overflow-x: auto;
+    }
+
+    /* 确认对话框样式 */
+    .confirm-dialog {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1001;
+    }
+
+    .confirm-dialog-content {
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        width: 400px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .confirm-dialog-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .confirm-dialog .cancel-btn {
+        padding: 8px 16px;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .confirm-dialog .cancel-btn:hover {
+        background: #e9ecef;
+    }
+
+    .confirm-dialog .confirm-btn {
+        padding: 8px 16px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .confirm-dialog .confirm-btn:hover {
+        background: #c82333;
+    }
+
+    /* 添加首字母头像样式 */
+    .avatar-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #4caf50;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .small-avatar {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+
+    /* 随机背景色类 */
+    .bg-color-1 { background: #4caf50; }
+    .bg-color-2 { background: #2196f3; }
+    .bg-color-3 { background: #9c27b0; }
+    .bg-color-4 { background: #f44336; }
+    .bg-color-5 { background: #ff9800; }
+
+    /* 提交状态样式更新 */
+    .submission-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .submission-id {
+        font-family: 'Consolas', monospace;
+        padding: 2px 6px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+    .submission-message {
+        font-weight: 500;
+    }
+
+    #submissionStatus.success .submission-id {
+        background: rgba(40, 167, 69, 0.1);
+    }
+
+    #submissionStatus.error .submission-id {
+        background: rgba(220, 53, 69, 0.1);
     }
