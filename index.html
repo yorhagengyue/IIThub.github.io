@@ -487,7 +487,6 @@
                             <button onclick="changeMonth(1)">&gt;</button>
                         </div>
                         <div class="days" id="calendar-days">
-                            <!-- Days will be dynamically added here -->
                         </div>
                     </div>
                     <div id="daily-problem">
@@ -510,6 +509,7 @@
                                 <h3>Geng Yue</h3>
                                 <p>Information Technology</p>
                                 <p>Year 1 | Student ID: 2403880d</p>
+                                <p>Email: 2403880d@studnet.tp.edu.sg</p>
                             </div>
                         </div>
                         <div class="profile-stats">
@@ -707,25 +707,36 @@
                         throw new Error('Code cannot be empty');
                     }
 
-                    if (code.length < 10) {
-                        throw new Error('Code must be at least 10 characters long');
+                    const minLength = 10;
+                    if (code.length < minLength) {
+                        throw new Error(`Code must be at least ${minLength} characters`);
                     }
 
-                    switch (language) {
-                        case 'python':
-                            if (!code.includes('def ') && !code.includes('class ')) {
-                                throw new Error('Python code should contain at least one function or class definition');
-                            }
-                            break;
-                        case 'javascript':
-                            if (!code.includes('function') && !code.includes('=>')) {
-                                throw new Error('JavaScript code should contain at least one function definition');
-                            }
-                            break;
+                    const languagePatterns = {
+                        python: {
+                            patterns: [/def\s+\w+\s*\(.*\)/, /class\s+\w+/],
+                            message: 'Python code must contain at least one function or class definition'
+                        },
+                        javascript: {
+                            patterns: [/function\s+\w+\s*\(.*\)/, /=>\s*{/, /class\s+\w+/],
+                            message: 'JavaScript code must contain at least one function or class definition'
+                        },
+                        java: {
+                            patterns: [/public\s+class\s+\w+/, /private\s+\w+\s+\w+\s*\(.*\)/],
+                            message: 'Java code must contain class definition and methods'
+                        },
+                        cpp: {
+                            patterns: [/\w+\s+\w+\s*\(.*\)/, /class\s+\w+/],
+                            message: 'C++ code must contain at least one function or class definition'
+                        }
+                    };
+
+                    const langPattern = languagePatterns[language];
+                    if (langPattern && !langPattern.patterns.some(pattern => pattern.test(code))) {
+                        throw new Error(langPattern.message);
                     }
                 }
-
-                // 修改提交按钮的事件处理
+             
                 document.getElementById('submitCodeBtn').addEventListener('click', async () => {
                     const codeInput = document.getElementById('codeInput');
                     const languageSelect = document.getElementById('codeLanguage');
@@ -733,15 +744,13 @@
                     const submissionStatus = document.getElementById('submissionStatus');
                     const submitBtn = document.getElementById('submitCodeBtn');
 
-                    // 生成提交ID (基于时间戳和随机数)
                     const submissionId = `SUB${Date.now().toString(36)}-${Math.random().toString(36).substr(2, 4)}`;
 
-                    // 重置状态
                     errorMessage.style.display = 'none';
                     submissionStatus.className = '';
                     submissionStatus.style.display = 'none';
                     
-                    // 添加加载状态
+
                     submitBtn.disabled = true;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
 
@@ -749,7 +758,6 @@
                         validateCode(codeInput.value, languageSelect.value);
                         await new Promise(resolve => setTimeout(resolve, 1000));
 
-                        // 成功状态
                         submissionStatus.innerHTML = `
                             <div class="submission-info">
                                 <div class="submission-id">ID: ${submissionId}</div>
@@ -763,12 +771,10 @@
 
                         setTimeout(() => {
                             closeModal();
-                            // 重置按钮状态
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
                         }, 1500);
                     } catch (error) {
-                        // 错误状态
                         errorMessage.textContent = error.message;
                         errorMessage.style.display = 'block';
                         submissionStatus.innerHTML = `
@@ -788,11 +794,9 @@
                 // closing modal boxes
                 document.querySelector('.close-btn').addEventListener('click', closeModal);
 
-                // 代码格式化功能
                 document.getElementById('formatCodeBtn').addEventListener('click', () => {
                     const codeInput = document.getElementById('codeInput');
                     try {
-                        // 这里可以集成像Prettier这样的格式化库
                         const formattedCode = formatCode(codeInput.value);
                         codeInput.value = formattedCode;
                     } catch (error) {
@@ -800,7 +804,7 @@
                     }
                 });
 
-                // 自动保存功能
+                // auto save
                 let autoSaveTimeout;
                 document.getElementById('codeInput').addEventListener('input', () => {
                     clearTimeout(autoSaveTimeout);
@@ -817,7 +821,6 @@
                     }, 1000);
                 });
 
-                // 运行代码功能
                 document.getElementById('runCodeBtn').addEventListener('click', async () => {
                     const code = document.getElementById('codeInput').value;
                     const language = document.getElementById('codeLanguage').value;
@@ -837,7 +840,7 @@
                     }
                 });
 
-                // 测试用例功能
+                // testing
                 document.getElementById('addTestCaseBtn').addEventListener('click', () => {
                     const testCaseList = document.querySelector('.test-case-list');
                     const newTestCase = document.createElement('div');
@@ -850,33 +853,32 @@
                     testCaseList.insertBefore(newTestCase, document.getElementById('addTestCaseBtn'));
                 });
 
-                // 改进的代码验证
                 function validateCode(code, language) {
                     if (!code.trim()) {
-                        throw new Error('代码不能为空');
+                        throw new Error('Code cannot be empty');
                     }
 
                     const minLength = 10;
                     if (code.length < minLength) {
-                        throw new Error(`代码至少需要${minLength}个字符`);
+                        throw new Error(`Code must be at least ${minLength} characters`);
                     }
 
                     const languagePatterns = {
                         python: {
                             patterns: [/def\s+\w+\s*\(.*\)/, /class\s+\w+/],
-                            message: 'Python代码应包含至少一个函数或类定义'
+                            message: 'Python code must contain at least one function or class definition'
                         },
                         javascript: {
                             patterns: [/function\s+\w+\s*\(.*\)/, /=>\s*{/, /class\s+\w+/],
-                            message: 'JavaScript代码应包含至一个函数或类定义'
+                            message: 'JavaScript code must contain at least one function or class definition'
                         },
                         java: {
                             patterns: [/public\s+class\s+\w+/, /private\s+\w+\s+\w+\s*\(.*\)/],
-                            message: 'Java代码应包含类定义和方法'
+                            message: 'Java code must contain class definition and methods'
                         },
                         cpp: {
                             patterns: [/\w+\s+\w+\s*\(.*\)/, /class\s+\w+/],
-                            message: 'C++代码应包含至少一个函数或类定义'
+                            message: 'C++ code must contain at least one function or class definition'
                         }
                     };
 
@@ -886,7 +888,6 @@
                     }
                 }
 
-                // 显示错误信息的辅助函数
                 function showError(message) {
                     const errorMessage = document.getElementById('errorMessage');
                     errorMessage.textContent = message;
@@ -896,23 +897,18 @@
                     }, 5000);
                 }
 
-                // 代码执行函数
                 async function runCode(code, language) {
                     const executionStatus = document.getElementById('executionStatus');
                     const resultsSection = document.querySelector('.results-section');
                     
                     try {
-                        // 显示执行状态
                         executionStatus.textContent = 'Running...';
                         executionStatus.style.color = '#f39c12';
                         
-                        // 验证代码基本格式
                         validateCode(code, language);
                         
-                        // 模拟代码执行（在实际项目中，这里应该是与后端API的通信）
                         const result = await executeCode(code, language);
                         
-                        // 显示执行结果
                         displayResults(result);
                         
                         return result;
@@ -922,7 +918,6 @@
                     }
                 }
 
-                // 代码验证函数
                 function validateCode(code, language) {
                     if (!code.trim()) {
                         throw new Error('Code cannot be empty');
@@ -932,37 +927,31 @@
                         throw new Error('Code must be at least 10 characters long');
                     }
 
-                    // 基本语法检查
+                    // Gramma Check
                     try {
                         switch(language) {
                             case 'javascript':
-                                new Function(code); // 尝试编译JavaScript代码
+                                new Function(code); 
                                 break;
                             case 'python':
-                                // 在实项目中需要后端验证Python语法
                                 if (!code.includes('def') && !code.includes('class')) {
                                     throw new Error('Python code must contain function or class definition');
                                 }
                                 break;
-                            // 其他语言的验证...
                         }
                     } catch (e) {
                         throw new Error(`Syntax Error: ${e.message}`);
                     }
                 }
 
-                // 模拟代码执行函数（在实际项目中应该是API调用）
                 async function executeCode(code, language) {
-                    await new Promise(resolve => setTimeout(resolve, 1500)); // 模拟执行延迟
-                    
+                    await new Promise(resolve => setTimeout(resolve, 1500)); 
                     try {
                         let output;
                         if (language === 'javascript') {
-                            // 在安全的环境中执行JavaScript代码
                             const sandbox = new Function('return ' + code)();
-                            output = sandbox; // 实际项目中需要更安全的沙箱环境
+                            output = sandbox; 
                         } else {
-                            // 其他语言需要后端执行
                             output = "Code execution requires backend support";
                         }
 
@@ -979,7 +968,6 @@
                     }
                 }
 
-                // 显示执行结果
                 function displayResults(result) {
                     const resultsSection = document.querySelector('.results-section');
                     resultsSection.style.display = 'block';
@@ -1017,7 +1005,7 @@
                     }
                 }
 
-                // 显示错误信息
+            
                 function displayError(error) {
                     const resultsSection = document.querySelector('.results-section');
                     resultsSection.style.display = 'block';
@@ -1030,7 +1018,6 @@
                     `;
                 }
 
-                // 添加复制输出结果功能
                 function copyOutput() {
                     const outputContent = document.querySelector('.output-content').textContent;
                     navigator.clipboard.writeText(outputContent).then(() => {
@@ -1042,41 +1029,34 @@
                     });
                 }
 
-                // 添加代码格式化函数
                 function formatCode(code) {
-                    // 这里是一个简单的格式化实现
-                    // 实际项目中建议使用 prettier 或其他格式化库
+     
                     try {
-                        // 按语句分割
                         const lines = code.split('\n');
                         let indentLevel = 0;
                         let formattedCode = '';
 
                         for (let line of lines) {
-                            // 移除行首尾空格
-                            line = line.trim();
+                          line = line.trim();
                             
-                            // 处理缩进
                             if (line.includes('}')) indentLevel = Math.max(0, indentLevel - 1);
-                            
-                            // 添加缩进
+                           
                             if (line.length > 0) {
                                 formattedCode += '    '.repeat(indentLevel) + line + '\n';
                             } else {
                                 formattedCode += '\n';
                             }
-                            
-                            // 增加缩进级别
+                          
                             if (line.includes('{')) indentLevel++;
                         }
 
                         return formattedCode;
                     } catch (error) {
-                        throw new Error('代码格式化失败: ' + error.message);
+                        throw new Error('Code formatting failed: ' + error.message);
                     }
                 }
 
-                // 更新运行代码按钮的事件监听器
+                
                 document.getElementById('runCodeBtn').addEventListener('click', async () => {
                     const code = document.getElementById('codeInput').value;
                     const language = document.getElementById('codeLanguage').value;
@@ -1088,30 +1068,25 @@
                         executionStatus.textContent = 'Running...';
                         
                         const result = await runCode(code, language);
-                        
-                        // 更新结果显示
+
                         document.getElementById('runtime').textContent = result.runtime + 'ms';
                         document.getElementById('memoryUsage').textContent = result.memory + 'MB';
                         executionStatus.textContent = result.status;
-                        
-                        // 添加成功样式
+
                         executionStatus.style.color = '#28a745';
                     } catch (error) {
-                        // 显示错误信息
                         executionStatus.textContent = 'Failed';
                         executionStatus.style.color = '#dc3545';
                         showError(error.message);
                     }
                 });
 
-                // 更新测试用例运行功能
                 document.addEventListener('click', (e) => {
                     if (e.target.classList.contains('run-test-btn')) {
                         const testCase = e.target.closest('.test-case');
                         const input = testCase.querySelector('.test-input').value;
                         const expectedOutput = testCase.querySelector('.test-output').value;
                         
-                        // 模拟测试用例执行
                         setTimeout(() => {
                             const success = Math.random() > 0.3; // 70%的概率成功
                             e.target.style.backgroundColor = success ? '#28a745' : '#dc3545';
@@ -1125,7 +1100,6 @@
                     }
                 });
 
-                // 添加关闭按钮事件处理
                 document.querySelector('.close-btn').addEventListener('click', async (e) => {
                     if (hasUnsavedChanges()) {
                         const confirmed = await showConfirmDialog(
@@ -1141,14 +1115,12 @@
                     closeModal();
                 });
 
-                // 检查是否有未保存的更改
                 function hasUnsavedChanges() {
                     const currentCode = document.getElementById('codeInput').value;
                     const savedCode = localStorage.getItem('savedCode');
                     return currentCode && currentCode !== savedCode;
                 }
 
-                // 修改确认对话框函数
                 function showConfirmDialog(title, message) {
                     return new Promise((resolve) => {
                         const dialog = document.createElement('div');
@@ -1177,19 +1149,16 @@
                         cancelBtn.addEventListener('click', () => {
                             document.body.removeChild(dialog);
                             resolve(false);
-                            // 重新显示模态框
                             document.getElementById('codeModal').style.display = 'block';
                         });
                     });
                 }
 
-                // 清除编辑器内容
                 function clearEditor() {
                     document.getElementById('codeInput').value = '';
                     localStorage.removeItem('savedCode');
                 }
 
-                // 关闭模态框
                 function closeModal() {
                     document.getElementById('codeModal').style.display = 'none';
                 }
